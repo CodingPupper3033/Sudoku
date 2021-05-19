@@ -3,11 +3,7 @@ class SudokuSquare:
         if numbs_can_be is None and numb_show == 0:
             self.numbs_can_be = list(range(1, 10))
         else:
-            if numb_show == 0:
-                self.numbs_can_be = [numb_show]
-            else:
-                self.numbs_can_be = numbs_can_be
-        self.numb_show = numb_show
+            self.set_square_numb(numb_show)
         self.update_numb_show()
 
     def cant_be_numb(self, *numbs):
@@ -28,6 +24,17 @@ class SudokuSquare:
 
     def showing_numb(self):
         return len(self.numbs_can_be) == 1
+
+    def get_square_save(self):
+        can_be_boolean = []
+        for numb in range(0,10):
+            can_be_boolean.append(numb in self.numbs_can_be)
+        return can_be_boolean
+
+    def same_square(self, square_save):
+        square_save_this = self.get_square_save()
+
+        return square_save == square_save_this
 
     def __str__(self):
         if self.numb_show != 0:

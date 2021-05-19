@@ -15,33 +15,34 @@ board.square_is([0, 6], 7)
 board.square_is([0, 7], 8)
 '''
 
-max_runs = 10000
-
-board = EasyBoard0.board
+max_runs = 1000
 
 
+# board = MakeBoardFromFile("ExampleBoardsTXT\HardBoard0.txt").get_board()
+board = MakeBoardFromFile("ExampleBoardsTXT\MediumBoard1.txt").get_board()
+#board = EasyBoard0.board
 
 # board.square_is([])
 
 pos_on = [0, 0]
 
 
+def solve_once(array_squares):
+    strand = SudokuStrand(array_squares)
+    strand.try_run()
+
+
 def run_once():
     # Row Solve
-    row_array = board.get_row(pos_on[0])
-    row_strand = SudokuStrand(row_array)
-    row_strand.try_run()
+    solve_once(board.get_row(pos_on[0]))
 
     # Column Solve
-    col_array = board.get_column(pos_on[1])
-    col_strand = SudokuStrand(col_array)
-    col_strand.try_run()
+    solve_once(board.get_column(pos_on[1]))
 
     # Box Solve
-    box_array = board.get_box(pos_on)
-    box_strand = SudokuStrand(box_array)
-    box_strand.try_run()
+    solve_once(board.get_box(pos_on))
 
+    # Next Pos
     move_next_pos()
 
 
@@ -58,11 +59,16 @@ def move_next_pos():
 count = 0
 print("Original:")
 print(board)
+
 print("")
 print("")
 print("")
+max_do_nothings = 3
 while count < max_runs and not board.is_filled():
     run_once()
     count += 1
-print("Solved in",count,"steps:")
+if board.is_filled():
+    print("Solved in", count, "steps:")
+else:
+    print("Unable to solve:")
 print(board)

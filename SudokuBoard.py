@@ -49,6 +49,18 @@ class SudokuBoard:
                     return False
         return True
 
+    def get_board_save(self):
+        out = []
+        for row in self.board:
+            row_out = []
+            for square in row:
+                row_out.append(square.get_square_save())
+            out.append(row_out)
+        return out
+
+    def same_board(self, board_save):
+        return self.get_board_save() == board_save
+
     def __str__(self):
         out = ""
         for squareRow in self.board:
