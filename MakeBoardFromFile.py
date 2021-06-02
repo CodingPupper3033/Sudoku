@@ -13,7 +13,8 @@ class MakeBoardFromFile:
             for char in line:
                 if char.isnumeric():
                     numb = int(char)
-                    self.board.square_is(pos, numb)
+                    if not numb == 0:
+                        self.board.square_is(pos, numb)
                 pos[1] += 1
             pos[1] = 0
             pos[0] += 1

@@ -18,8 +18,8 @@ board.square_is([0, 7], 8)
 max_runs = 1000
 
 
-# board = MakeBoardFromFile("ExampleBoardsTXT\HardBoard0.txt").get_board()
-board = MakeBoardFromFile("ExampleBoardsTXT\MediumBoard1.txt").get_board()
+board = MakeBoardFromFile("ExampleBoardsTXT\FromGitHub\GithubBoard4.txt").get_board()
+# board = MakeBoardFromFile("ExampleBoardsTXT\MediumBoard1.txt").get_board()
 #board = EasyBoard0.board
 
 # board.square_is([])
@@ -70,5 +70,5 @@ while count < max_runs and not board.is_filled():
 if board.is_filled():
     print("Solved in", count, "steps:")
 else:
-    print("Unable to solve:")
+    print("Unable to solve within", count, "steps:")
 print(board)

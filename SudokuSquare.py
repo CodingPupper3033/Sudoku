@@ -1,9 +1,12 @@
 class SudokuSquare:
-    def __init__(self, numb_show=0, numbs_can_be=None):
-        if numbs_can_be is None and numb_show == 0:
-            self.numbs_can_be = list(range(1, 10))
-        else:
+    def __init__(self, numb_show=0, numbs_can_be=list(range(1, 10))):
+        self.numb_show = numb_show
+
+        self.numbs_can_be = numbs_can_be.copy()
+
+        if not (numb_show == 0):
             self.set_square_numb(numb_show)
+
         self.update_numb_show()
 
     def cant_be_numb(self, *numbs):
@@ -35,6 +38,16 @@ class SudokuSquare:
         square_save_this = self.get_square_save()
 
         return square_save == square_save_this
+
+    def combine_possible_values(squares):
+        out = []
+        for square in squares:
+            # Each square
+            for numb_can_be in square.numbs_can_be:
+                if not (numb_can_be in out):
+                    out.append(numb_can_be)
+        out.sort()
+        return out;
 
     def __str__(self):
         if self.numb_show != 0:
